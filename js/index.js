@@ -13,6 +13,7 @@ fechaCaptura.value = `${year}-${month}-${day}T${hours}:${minutes}`;
 
 // DEPENDIENDO LA SELECCION EL FOLIO SE GENERA CON LAS SIGLAS
 document.getElementById('tipoSolicitud').addEventListener('change', function() {
+    // Generar folio (tu código existente)
     const prefijos = {
         'OFP': 'OFP',
         'INT': 'INT',
@@ -20,10 +21,27 @@ document.getElementById('tipoSolicitud').addEventListener('change', function() {
         'CRE': 'CRE',
         'CXC': 'CXC'
     };
-    
     const añoActual = new Date().getFullYear();
-    const numeroAleatorio = Math.floor(1000 + Math.random() * 9000); // Número de 4 dígitos
+    const numeroAleatorio = Math.floor(1000 + Math.random() * 9000);
     const folio = document.getElementById('Folio');
-    
     folio.value = `${prefijos[this.value]}-${añoActual}-${numeroAleatorio}`;
+
+    // Controlar el campo Área
+    const areaSelect = document.getElementById('areaSelect');
+    const areaInput = document.getElementById('areaInput');
+    
+    if (this.value === 'INT') {
+        areaSelect.style.display = 'block';
+        areaInput.style.display = 'none';
+        areaSelect.required = true;
+        areaInput.required = false;
+        areaInput.value = "";
+    } else {
+        areaSelect.style.display = 'none';
+        areaInput.style.display = 'block';
+        areaSelect.required = false;
+        areaInput.required = true;
+        areaSelect.value="";
+    }
 });
+
