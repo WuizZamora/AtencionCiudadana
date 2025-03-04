@@ -17,6 +17,33 @@
         <form action="#" autocomplete="off" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-3 mb-3">
+                    <label class="form-label" for="tipoSolicitud">Tipo de solicitud</label>
+                    <select class="form-select text-center" id="tipoSolicitud" name="tipoSolicitud" required>
+                        <option selected disabled value="">Elige una opción</option>
+                        <option value="OFP">Oficialia de partes</option>
+                        <option value="INT">Interno</option>
+                        <option value="ATC">Atención ciudadana</option>
+                        <option value="CRE">Correo Electronico</option>
+                        <option value="CXC">Casa por casa</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="fechaCaptura" class="form-label">Fecha de captura</label>
+                    <input class="form-control text-center" type="datetime-local" id="fechaCaptura" name="fechaCaptura" maxlength="" required>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="Folio" class="form-label text-success">Folio</label>
+                    <input class="form-control text-center" type="text" id="Folio" name="Folio" required>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="" class="form-label">Oficio</label>
+                    <input class="form-control" type="text" id="" name="" maxlength="" required>
+                </div>
+
+                <div class="col-md-3 mb-3">
                     <label class="form-label" for="">Área</label>
                     <select class="form-select text-center" id="" name="" required>
                         <option selected disabled value="">Elige una opción</option>
@@ -25,9 +52,10 @@
                         <option value="">OPCIÓN 3</option>
                     </select>
                 </div>
+
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="">Fecha de recepción</label>
-                    <input type="datetime-local" class="form-control text-center" name="" id="" required>
+                    <input type="date" class="form-control text-center" name="" id="" required>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="">Fecha del documento</label>
@@ -49,10 +77,7 @@
                     <label for="" class="form-label">Turno</label>
                     <input class="form-control" type="text" id="" name="" maxlength="" required>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <label for="" class="form-label">Oficio</label>
-                    <input class="form-control" type="text" id="" name="" maxlength="" required>
-                </div>
+                
                 <div class="col-md-3 mb-3">
                     <label for="" class="form-label">Dirigido a</label>
                     <input class="form-control" type="text" id="" name="" maxlength="" required>
@@ -127,17 +152,9 @@
                 <label for="" class="form-label">Oficio de atención</label>
                 <input class="form-control" type="text" id="" name="" maxlength="" required>
             </div>
-            <div class="col-md-3 mb-3">
-                <label for="" class="form-label">Fecha de atención</label>
-                <input class="form-control" type="datetime-local" id="" name="" maxlength="" required>
-            </div>
-            <div class="col-md-3 mb-3">
-                <label for="" class="form-label text-success">Folio</label>
-                <input class="form-control" type="text" id="" name="" maxlength="" required>
-            </div>
         </div>
         <hr>
-
+<!--
         <h3 class="text-center">
             CORRESPONDENCIA DE SALIDA (AÑO)
         </h3>
@@ -365,9 +382,10 @@
                 </div>
 
             </div>
-        </form>
+        </form> -->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
