@@ -14,13 +14,13 @@
             CORRESPONDENCIA DE ENTRADA (AÑO)
         </h3>
         <hr>
-        <form action="#" autocomplete="off" enctype="multipart/form-data">
+        <form action="insertar.php" method="post" autocomplete="off" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="tipoSolicitud">Tipo de solicitud</label>
                     <select class="form-select text-center" id="tipoSolicitud" name="tipoSolicitud" required>
                         <option selected disabled value="">Elige una opción</option>
-                        <option value="OFP">Oficialia de partes</option>
+                        <option value="OPA">Oficialia de partes</option>
                         <option value="INT">Interno</option>
                         <option value="ATC">Atención ciudadana</option>
                         <option value="CRE">Correo Electronico</option>
@@ -39,8 +39,8 @@
                 </div>
 
                 <div class="col-md-3 mb-3">
-                    <label for="" class="form-label">Oficio</label>
-                    <input class="form-control" type="text" id="" name="" maxlength="" required>
+                    <label for="Oficio" class="form-label">Oficio</label>
+                    <input class="form-control" type="text" id="Oficio" name="Oficio" maxlength="" required>
                 </div>
 
                 <div class="col-md-3 mb-3">
@@ -60,17 +60,17 @@
                 </div>
 
                 <div class="col-md-3 mb-3">
-                    <label class="form-label" for="">Fecha de recepción</label>
-                    <input type="date" class="form-control text-center" name="" id="" required>
+                    <label class="form-label" for="fechaRecepcion">Fecha de recepción</label>
+                    <input type="date" class="form-control text-center" name="fechaRecepcion" id="fechaRecepcion" required>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <label class="form-label" for="">Fecha del documento</label>
-                    <input type="date" class="form-control text-center" name="" id="" required>
+                    <label class="form-label" for="fechaDocumento">Fecha del documento</label>
+                    <input type="date" class="form-control text-center" name="fechaDocumento" id="fechaDocumento" required>
                 </div>
 
                 <div class="col-md-3 mb-3">
-                    <label for="" class="form-label">Funcionario designado</label>
-                    <select class="form-select text-center" id="" name="" required>
+                    <label for="funcionarioAsignado" class="form-label">Funcionario designado</label>
+                    <select class="form-select text-center" id="funcionarioAsignado" name="funcionarioAsignado" required>
                         <option selected disabled value="">Elige una opción</option>
                         <option value="">OPCIÓN 1</option>
                         <option value="">OPCIÓN 2</option>
@@ -103,25 +103,25 @@
                 <h5 class="text-center">REMITENTE</h5>
                 <hr>
                 <div class="col-md-4 mb-3">
-                    <label for="" class="form-label">Nombre completo</label>
-                    <input class="form-control" type="text" id="" name="" maxlength="" required>
+                    <label for="nombreRemitente" class="form-label">Nombre completo</label>
+                    <input class="form-control" type="text" id="nombreRemitente" name="nombreRemitente" maxlength="" required>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="" class="form-label">Cargo del remitente</label>
-                    <input class="form-control" type="text" id="" name="" maxlength="" required>
+                    <label for="cargoRemitente" class="form-label">Cargo del remitente</label>
+                    <input class="form-control" type="text" id="cargoRemitente" name="cargoRemitente" maxlength="" required>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="" class="form-label">Dependencia </label>
-                    <input class="form-control" type="text" id="" name="" maxlength="" required>
+                    <label for="dependenciaRemitente" class="form-label">Dependencia </label>
+                    <input class="form-control" type="text" id="dependenciaRemitente" name="dependenciaRemitente" maxlength="" required>
                 </div>
                 <hr>
                 <div class="col-md-4 mb-3">
-                    <label for="" class="form-label">Categoria (ANTES TEMA)</label>
-                    <input class="form-control" type="text" id="" name="" maxlength="" required>
+                    <label for="categoria" class="form-label">Categoria (ANTES TEMA)</label>
+                    <input class="form-control" type="text" id="categoria" name="categoria" maxlength="" required>
                 </div>
                 <div class="col-md-8 mb-3">
-                    <label for="" class="form-label">Asunto</label>
-                    <textarea class="form-control" name="" id="" rows="8" maxlength="400" required> </textarea>
+                    <label for="asunto" class="form-label">Asunto</label>
+                    <textarea class="form-control" name="asunto" id="asunto" rows="8" maxlength="400" required> </textarea>
                 </div>
                 <!-- <div class="col-md-3 mb-3">
                     <label for="" class="form-label text-danger">Fecha del evento</label>
@@ -140,6 +140,108 @@
                 <button class="btn btn-danger" type="submit">Guardar</button>
             </div>
         </form>
+
+        <?php
+        $servidor = "localhost";
+        $usuario = "root";
+        $contrasena = "Lazp221819.";
+        $basedatos = "ATENCION_CIUDADANA";
+
+        // Crear conexión
+        $conexion = new mysqli($servidor, $usuario, $contrasena, $basedatos);
+
+        // Verificar conexión
+        if ($conexion->connect_error) {
+            die("Error de conexión: " . $conexion->connect_error);
+        }
+
+        // echo "Conexión exitosa con MySQLi";
+
+        // Consulta SQL
+        $sql = "SELECT * FROM Correspondencia_Entrada ORDER BY PK_IDCorrespondenciaEntrada DESC";
+        $result = $conexion->query($sql);
+        ?>
+
+        <div class="container mt-4">
+            <h2 class="mb-4">Correspondencia Entrante</h2>
+
+            <div class="container">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Folio</th>
+                            <!-- <th>ID</th> -->
+                            <th>Tipo de solicitud</th>
+                            <th>Captura</th>
+                            <th>Oficio</th>
+                            <th>Área</th>
+                            <th>Recepción</th>
+                            <th>Documento</th>
+                            <th>Funcionario</th>
+                            <th>Turno</th>
+                            <th>Remitente</th>
+                            <th>Cargo</th>
+                            <th>Dependencia</th>
+                            <th>Categoría</th>
+                            <th>Asunto</th>
+                            <th>Estado</th>
+                            <th>Oficio Atención</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($result->num_rows > 0) {
+                            while ($fila = $result->fetch_assoc()) {
+                                echo '<tr>';
+                                echo '<td>' . $fila["Folio"] . '</td>';
+                                // echo '<td>' . $fila["PK_IDCorrespondenciaEntrada"] . '</td>';
+                                echo '<td>' . $fila["TipoSolicitud"] . '</td>';
+                                echo '<td>' . ($fila["FechaCaptura"] ? date('d/m/Y H:i', strtotime($fila["FechaCaptura"])) : '') . '</td>';
+                                echo '<td>' . $fila["Oficio"] . '</td>';
+                                echo '<td>' . $fila["Area"] . '</td>';
+                                echo '<td>' . date('d/m/Y H:i', strtotime($fila["FechaRecepcion"])) . '</td>';
+                                echo '<td>' . date('d/m/Y', strtotime($fila["FechaDocumento"])) . '</td>';
+                                echo '<td>' . $fila["FuncionarioAsignado"] . '</td>';
+                                echo '<td>' . $fila["Turno"] . '</td>';
+                                echo '<td>' . $fila["NombreRemitente"] . '</td>';
+                                echo '<td>' . $fila["CargoRemitente"] . '</td>';
+                                echo '<td>' . $fila["DependenciaRemitente"] . '</td>';
+                                echo '<td>' . $fila["Categoria"] . '</td>';
+                                echo '<td>' . $fila["Asunto"] . '</td>';
+                                echo '<td><span class="badge text-' . getEstadoBadge($fila["EstadoSolicitud"]) . '">' . $fila["EstadoSolicitud"] . '</span></td>';
+                                echo '<td>' . $fila["OficioAtencion"] . '</td>';
+                                echo '</tr>';
+                            }
+                        } else {
+                            echo '<tr><td colspan="19" class="text-center">No se encontraron registros</td></tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <?php
+        // Función para colores de los estados
+        function getEstadoBadge($estado)
+        {
+            switch ($estado) {
+                case 'ATENDIDO':
+                    return 'success';
+                case 'EN PROCESO':
+                    return 'warning';
+                case 'CANCELADO':
+                    return 'danger';
+                default:
+                    return 'success';
+            }
+        }
+
+        // Liberar memoria y cerrar conexión
+        $result->free();
+        $conexion->close();
+        ?>
+
         <!-- SEGUIMIENTO -->
         <!-- <h5 class="text-center">
             SEGUIMIENTO / ESTATUS
