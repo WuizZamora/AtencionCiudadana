@@ -15,11 +15,11 @@ fechaCaptura.value = `${year}-${month}-${day}T${hours}:${minutes}`;
 document.getElementById('tipoSolicitud').addEventListener('change', function () {
     // Generar folio (tu código existente)
     const prefijos = {
-        'OPA': 'OPA',
-        'INT': 'INT',
-        'ATC': 'ATC',
-        'CRE': 'CRE',
-        'CXC': 'CXC'
+        'Oficialia_Partes': 'OPA',
+        'Formato': 'FOR',
+        'Correo_Electrónico': 'CRE',
+        'SUAC': 'SUAC',
+        'Interno': 'INT'
     };
     const añoActual = new Date().getFullYear();
     const numeroAleatorio = Math.floor(1000 + Math.random() * 9000);
@@ -29,17 +29,36 @@ document.getElementById('tipoSolicitud').addEventListener('change', function () 
     // Controlar el campo Área
     const areaSelect = document.getElementById('areaSelect');
     const areaInput = document.getElementById('areaInput');
+    // Campo SUAC
+    const campoTipoSuac = document.getElementById('CampoTipoSuac');
+    const selectTipoSuac = document.getElementById('tipoSuac');
 
-    if (this.value === 'INT') {
-        areaInput.value = "";
+    // Reiniciar valores al cambiar el tipo de solicitud
+    areaSelect.value = "";
+    areaInput.value = "";
+    selectTipoSuac.value=""
+
+    if(this.value === 'SUAC'){
+        campoTipoSuac.style.display = 'block';
+        campoTipoSuac.disabled = false;
+        campoTipoSuac.required = true;
+    } else{
+        campoTipoSuac.style.display = 'none';
+        campoTipoSuac.disabled = true; 
+        campoTipoSuac.required = false;
+    }
+    if (this.value === 'Interno') {
         areaSelect.style.display = 'block';
         areaInput.style.display = 'none';
+        areaInput.disabled = true;
+        areaSelect.disabled = false;
         areaSelect.required = true;
         areaInput.required = false;
     } else {
-        areaSelect.value = "";
         areaSelect.style.display = 'none';
         areaInput.style.display = 'block';
+        areaSelect.disabled = true;
+        areaInput.disabled = false;
         areaSelect.required = false;
         areaInput.required = true;
     }

@@ -19,6 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fechaCaptura = date("Y-m-d H:i:s", strtotime($_POST['fechaCaptura']));
     $folio = mysqli_real_escape_string($conexion, $_POST['Folio']);
     $oficio = mysqli_real_escape_string($conexion, $_POST['Oficio']);
+      // Validar que el área no esté vacía
+      if (empty($_POST['area'])) {
+        die("Error: El campo Área es obligatorio.");
+    }
     $area = mysqli_real_escape_string($conexion, $_POST['area']);
     $fechaRecepcion = date("Y-m-d H:i:s", strtotime($_POST['fechaRecepcion']));
     $fechaDocumento = mysqli_real_escape_string($conexion, $_POST['fechaDocumento']);

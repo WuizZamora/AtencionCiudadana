@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -20,11 +20,20 @@
                     <label class="form-label" for="tipoSolicitud">Tipo de solicitud</label>
                     <select class="form-select text-center" id="tipoSolicitud" name="tipoSolicitud" required>
                         <option selected disabled value="">Elige una opción</option>
-                        <option value="OPA">Oficialia de partes</option>
-                        <option value="INT">Interno</option>
-                        <option value="ATC">Atención ciudadana</option>
-                        <option value="CRE">Correo Electronico</option>
-                        <option value="CXC">Casa por casa</option>
+                        <option value="Oficialia_Partes">Oficialia de partes</option>
+                        <option value="Formato">Formato</option>
+                        <option value="Correo_Electrónico">Correo Electronico</option>
+                        <option value="SUAC">SUAC</option>
+                        <option value="Interno">Interno</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 mb-3" id="CampoTipoSuac" style="display: none;">
+                    <label for="tipoSuac" class="form-label">Tipo de SUAC</label>
+                    <select class="form-select text-center" id="tipoSuac" name="tipoSuac">
+                        <option selected disabled value="">Elige una opción</option>
+                        <option value="Normal">Normal</option>
+                        <option value="CxC">Casa por casa</option>
                     </select>
                 </div>
 
@@ -46,8 +55,8 @@
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="area">Área</label>
                     <!-- Select para Interno (INT) -->
-                    <select class="form-select text-center" id="areaSelect" name="area" required style="display: none;">
-                        <option selected disabled value="">Elige una opción</option>
+                    <select class="form-select text-center" id="areaSelect" name="area" style="display: none;">
+                        <option disabled value="">Elige una opción</option>
                         <option value="DG">DIRECCIÓN GENERAL</option>
                         <option value="DESC">DIRECCIÓN EJECUTIVA DE SUBSTANCIACIÓN Y CALIFICACIÓN</option>
                         <option value="DEVT">DIRECCIÓN EJECUTIVA DE VERIFICACIÓN AL TRANSPORTE</option>
@@ -56,7 +65,7 @@
                         <option value="DEVA">DIRECCIÓN EJECUTIVA DE VERIFICACIÓN ADMINISTRATIVA</option>
                     </select>
                     <!-- Input para otros tipos -->
-                    <input type="text" class="form-control" id="areaInput" name="area" required style="display: none;">
+                    <input type="text" class="form-control" id="areaInput" name="area" style="display: none;">
                 </div>
 
                 <div class="col-md-3 mb-3">
@@ -72,9 +81,9 @@
                     <label for="funcionarioAsignado" class="form-label">Funcionario designado</label>
                     <select class="form-select text-center" id="funcionarioAsignado" name="funcionarioAsignado" required>
                         <option selected disabled value="">Elige una opción</option>
-                        <option value="">OPCIÓN 1</option>
-                        <option value="">OPCIÓN 2</option>
-                        <option value="">OPCIÓN 3</option>
+                        <option value="OPCIÓN 1">OPCIÓN 1</option>
+                        <option value="OPCIÓN 2">OPCIÓN 2</option>
+                        <option value="OPCIÓN 3">OPCIÓN 3</option>
                     </select>
                 </div>
 
@@ -158,7 +167,7 @@
         // echo "Conexión exitosa con MySQLi";
 
         // Consulta SQL
-        $sql = "SELECT * FROM Correspondencia_Entrada ORDER BY PK_IDCorrespondenciaEntrada DESC";
+        $sql = "SELECT PK_IDCorrespondenciaEntrada, Folio, TipoSolicitud, FechaCaptura, NombreRemitente, EstadoSolicitud  FROM Correspondencia_Entrada ORDER BY PK_IDCorrespondenciaEntrada DESC";
         $result = $conexion->query($sql);
         ?>
 
@@ -173,19 +182,9 @@
                             <!-- <th>ID</th> -->
                             <th>Tipo de solicitud</th>
                             <th>Captura</th>
-                            <th>Oficio</th>
-                            <th>Área</th>
-                            <th>Recepción</th>
-                            <th>Documento</th>
-                            <th>Funcionario</th>
-                            <th>Turno</th>
                             <th>Remitente</th>
-                            <th>Cargo</th>
-                            <th>Dependencia</th>
-                            <th>Categoría</th>
-                            <th>Asunto</th>
                             <th>Estado</th>
-                            <th>Oficio Atención</th>
+                            <th>Acciónes</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -196,20 +195,11 @@
                                 echo '<td>' . $fila["Folio"] . '</td>';
                                 // echo '<td>' . $fila["PK_IDCorrespondenciaEntrada"] . '</td>';
                                 echo '<td>' . $fila["TipoSolicitud"] . '</td>';
-                                echo '<td>' . ($fila["FechaCaptura"] ? date('d/m/Y H:i', strtotime($fila["FechaCaptura"])) : '') . '</td>';
-                                echo '<td>' . $fila["Oficio"] . '</td>';
-                                echo '<td>' . $fila["Area"] . '</td>';
-                                echo '<td>' . date('d/m/Y H:i', strtotime($fila["FechaRecepcion"])) . '</td>';
-                                echo '<td>' . date('d/m/Y', strtotime($fila["FechaDocumento"])) . '</td>';
-                                echo '<td>' . $fila["FuncionarioAsignado"] . '</td>';
-                                echo '<td>' . $fila["Turno"] . '</td>';
+                                echo '<td>' . ($fila["FechaCaptura"] ? date('d/m/Y H:i:s', strtotime($fila["FechaCaptura"])) : '') . '</td>';
                                 echo '<td>' . $fila["NombreRemitente"] . '</td>';
-                                echo '<td>' . $fila["CargoRemitente"] . '</td>';
-                                echo '<td>' . $fila["DependenciaRemitente"] . '</td>';
-                                echo '<td>' . $fila["Categoria"] . '</td>';
-                                echo '<td>' . $fila["Asunto"] . '</td>';
                                 echo '<td><span class="badge text-' . getEstadoBadge($fila["EstadoSolicitud"]) . '">' . $fila["EstadoSolicitud"] . '</span></td>';
-                                echo '<td>' . $fila["OficioAtencion"] . '</td>';
+                                echo '<td><a href="/AtencionCiudadana/verSolicitud.php?IDSolicitud=' . $fila["PK_IDCorrespondenciaEntrada"] . '" target="_blank" class="btn btn-success">Ver</a></td>';
+
                                 echo '</tr>';
                             }
                         } else {
