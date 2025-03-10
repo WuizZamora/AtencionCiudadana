@@ -13,22 +13,9 @@
 
     $IDSolicitud = $_GET['IDSolicitud'];
 
-    // echo "ID: " . $IDSolicitud;
+    require 'config/connection.php';
+    $conexion = Connection::conectar(); // Obtiene la conexión MySQLi
 
-    $servidor = "localhost";
-    $usuario = "root";
-    $contrasena = "Lazp221819.";
-    $basedatos = "ATENCION_CIUDADANA";
-
-    // Crear conexión
-    $conexion = new mysqli($servidor, $usuario, $contrasena, $basedatos);
-
-    // Verificar conexión
-    if ($conexion->connect_error) {
-        die("Error de conexión: " . $conexion->connect_error);
-    }
-
-    // echo "Conexión exitosa con MySQLi";
 
     // Consulta SQL
     $sql = "SELECT * FROM Correspondencia_Entrada WHERE PK_IDCorrespondenciaEntrada = $IDSolicitud";
@@ -106,9 +93,9 @@
         <?php else: ?>
             <div class="alert alert-warning">No se encontraron registros</div>
         <?php endif; ?>
-        <h3>SEGUMIENTO</h3>
+        <h3>SEGUIMIENTO</h3>
         <table class="table table-striped table-hover table-bordered">
-            <thead class="thead-dark">
+            <thead class="table-danger">
                 <tr>
                     <th>DATO 1</th>
                     <th>DATO 2</th>

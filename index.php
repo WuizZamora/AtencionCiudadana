@@ -8,8 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<body>
-    <div class="container text-center">
+<body class="bg-dark">
+    <div class="container text-center bg-dark text-white">
         <h3 class="tex-center">
             CORRESPONDENCIA DE ENTRADA (AÑO)
         </h3>
@@ -146,25 +146,13 @@
                 </div> -->
             </div>
             <div class="col-12">
-                <button class="btn btn-danger" type="submit">Guardar</button>
+                <button class="btn btn-warning" type="submit">Guardar</button>
             </div>
         </form>
 
         <?php
-        $servidor = "localhost";
-        $usuario = "root";
-        $contrasena = "Lazp221819.";
-        $basedatos = "ATENCION_CIUDADANA";
-
-        // Crear conexión
-        $conexion = new mysqli($servidor, $usuario, $contrasena, $basedatos);
-
-        // Verificar conexión
-        if ($conexion->connect_error) {
-            die("Error de conexión: " . $conexion->connect_error);
-        }
-
-        // echo "Conexión exitosa con MySQLi";
+        require 'config/connection.php';
+        $conexion = Connection::conectar(); // Obtiene la conexión MySQLi
 
         // Consulta SQL
         $sql = "SELECT PK_IDCorrespondenciaEntrada, Folio, TipoSolicitud, FechaCaptura, NombreRemitente, EstadoSolicitud  FROM Correspondencia_Entrada ORDER BY PK_IDCorrespondenciaEntrada DESC";
@@ -175,8 +163,8 @@
             <h2 class="mb-4">Correspondencia Entrante</h2>
 
             <div class="container">
-                <table class="table table-striped table-hover table-bordered">
-                    <thead class="thead-dark">
+                <table class="table table-striped table-hover table-bordered ">
+                    <thead class="table-primary">
                         <tr>
                             <th>Folio</th>
                             <!-- <th>ID</th> -->
