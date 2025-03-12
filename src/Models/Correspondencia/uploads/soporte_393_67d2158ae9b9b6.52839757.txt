@@ -1,0 +1,14 @@
+SERVER
+ssh root@141.136.42.192
+
+LOGIN: root
+Password: Mondainai230320#
+
+screen 
+(inicia el proyecto) 
++ ME SALGO CON presionando Ctrl+A seguido de D +
+REGRESO AL PROCESO CON screen -r
+
+SERE: 
+CORREO: mondainaimasservicios@gmail.com
+PASS: Ivan271186#
