@@ -97,14 +97,14 @@
         <hr>
         <form action="#" autocomplete="off" enctype="multipart/form-data">
             <div class="row">
-                <div class="col-md-3 mb-3">
+                <!-- <div class="col-md-3 mb-3">
                     <label for="" class="form-label">MODALIDAD / OFICIO</label>
                     <input class="form-control" type="text" id="" name="" required>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="" class="form-label">CARGO / DEPENDENCIA</label>
                     <input class="form-control" type="text" id="" name="" required>
-                </div>
+                </div> -->
 
                 <h5 class="text-center">REMITENTE</h5>
                 <hr>
@@ -125,7 +125,7 @@
                     <label for="" class="form-label">Asunto</label>
                     <input class="form-control" type="text" id="" name="" maxlength="" required>
                 </div>
-                <h5 class="text-center">
+                <!-- <h5 class="text-center">
                     Dirección
                 </h5>
                 <hr>
@@ -141,7 +141,7 @@
                     <label for="" class="form-label">Alcaldia</label>
                     <input class="form-control" type="text" id="" name="" maxlength="" required>
                 </div>
-                <hr>
+                <hr> -->
                 <div class="col-md-3 mb-3">
                     <label for="" class="form-label">Personal para zonificación</label>
                     <select class="form-select text-center" id="" name="" required>
